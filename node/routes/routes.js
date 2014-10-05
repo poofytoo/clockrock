@@ -1,4 +1,3 @@
-// var mongoose = require('mongoose');
 var http = require('http');
 var parseString = require('xml2js').parseString;
 var _ = require('underscore');
@@ -26,10 +25,8 @@ exports.shuttles = function(req, res) {
 }
 
 exports.toggle = function(req, res) {
-  console.log('post')
   toggleStatus = !toggleStatus;
   winkapi.setOutlet(20582, toggleStatus, function(err, outlet) {
-    console.log('toggled!' + toggleStatus);
     if (!!err) return console.log('setOutlet: ' + err.message);
   });
   res.end();

@@ -13,17 +13,13 @@ angular.module('clockrock', [])
   .controller('ShuttleController', function($scope, $http) {
     $http.post('/getShuttles', {})
       .success(function(data, status, headers, config) {
-        console.log('hey');
         $scope.shuttles = data.shuttles;
-        console.log($scope.shuttles);
       })
       .error(function(data, status, headers, config) {
         console.log("Error getting shuttles list: " + data + "; " + status);
       });
 
     $scope.toggleLight = function() {
-      $.post('/toggle', {hey: 'hello'}, function(data) {
-        console.log(data);
-      });
+      $.post('/toggle');
     };
   });
