@@ -32,11 +32,9 @@ winkapi = new WinkAPI.WinkAPI({ clientID     : authConfig.auth.client_id
     if (!!err) return console.log('setOutlet: ' + err.message);
   });
   var dial = {};
-  
+
   dial.path = '/dials/33321';
-  dial.label = 'cat';
-  dial.labels = ['cats'];
-  dial.position = 40;
+  
   dial.props =      {
       "dial_template_id": "10",
       "dial_configuration": {
@@ -51,8 +49,11 @@ winkapi = new WinkAPI.WinkAPI({ clientID     : authConfig.auth.client_id
       "channel_configuration": {
           "channel_id": "10"
       },
-      "name": "Manual control"
+      "name": "Manual control",
+      "value": 300,
+      "labels": ["hi", "hi2"]
   }
+  
   winkapi.setDial(dial, { enabled: true }, function(err, dial) {
     if (!!err) return console.log('setDial: ' + err.message);
     // inspect dial{}

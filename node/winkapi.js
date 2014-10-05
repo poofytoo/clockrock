@@ -246,6 +246,7 @@ WinkAPI.prototype.setDial = function(dial, props, callback) {
          , label                 : props.label                 || dial.props.label
          , labels                : props.labels                || dial.props.labels
          , position              : props.position              || dial.props.position
+         , value                 : props.value                 || dial.props.value
          , brightness            : props.brightness            || dial.props.brightness
          , channel_configuration : props.channel_configuration || dial.props.channel_configuration 
          , dial_configuration    : props.dial_configuration    || dial.props.dial_configuration
