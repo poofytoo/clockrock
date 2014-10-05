@@ -329,6 +329,7 @@ WinkAPI.prototype.invoke = function(method, path, json, callback) {
       var results = {};
 
       try { results = JSON.parse(body); } catch(ex) {
+        console.log(ex);
         self.logger.error(path, { event: 'json', diagnostic: ex.message, body: body });
         return callback(ex, response.statusCode);
       }

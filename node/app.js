@@ -26,15 +26,19 @@ winkapi = new WinkAPI.WinkAPI({ clientID     : authConfig.auth.client_id
   if (!!err) return console.log('login error: ' + err.message);
 
   // otherwise, good to go!
-}).on('error', function(err) {
-  console.log('background error: ' + err.message);
-});
 
-winkapi.setOutlet(20582, function(err, outlet) {
+  winkapi.setOutlet(20582, function(err, outlet) {
   if (!!err) return console.log('setOutlet: ' + err.message);
 
   // inspect outlet{}
 });
+
+  
+}).on('error', function(err) {
+  console.log('background error: ' + err.message);
+});
+
+
 
 app.get('/', routes.index);
 // Uncomment the next line to test the database
