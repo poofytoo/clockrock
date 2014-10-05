@@ -205,8 +205,8 @@ WinkAPI.prototype.setDevice = function(device, props, callback) {
   });
 };
 // WinkAPI.prototype.setOutlet = WinkAPI.prototype.setDevice;
-WinkAPI.prototype.setOutlet = function(id, callback) {
-  return this.roundtrip('PUT', '/outlets/' + id, {powered: true}, callback);
+WinkAPI.prototype.setOutlet = function(id, toggleStatus, callback) {
+  return this.roundtrip('PUT', '/outlets/' + id, {powered: toggleStatus}, callback);
 }
 
 WinkAPI.prototype.getIcons = function(callback) {
