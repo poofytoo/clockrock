@@ -5,7 +5,7 @@ var bodyParser = require('body-parser');
 var hbs = require('hbs');
 var routes = require(__dirname + '/routes/routes');
 var authConfig = require(__dirname + '/authConfig');
-var WinkAPI = require('node-winkapi');
+var WinkAPI = require(__dirname + '/winkapi');
 
 var app = express();
 
