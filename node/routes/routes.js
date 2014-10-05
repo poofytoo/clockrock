@@ -1,40 +1,36 @@
-var mongoose = require('mongoose');
-
-// Uncomment the code below to use mongoose + MongoDB
-// Make sure mongo is running before you start the server!
-
-/*
-// DATABASE CONNECTION
-mongoose.connect('mongodb://localhost/test');
-
-// Error handler
-mongoose.connection.on('error', function (err) {
-  console.log(err)
-});
-
-// Reconnect when closed
-mongoose.connection.on('disconnected', function () {
-  mongoose.connect('mongodb://localhost/test');
-});
-
-// Sample Schema
-var SampleModel = require('../models/sample')(mongoose);
-
-// END DATABASE
-
-// Route to test database
-exports.testDatabase = function(req, res) {
-  var example = new SampleModel({text: "This is a test."});
-  example.save(function(err) {
-    if (err) {
-      res.render('index.html', {text: err});
-    } else {
-      res.render('index.html', {text: example.text});
-    }
-  });
-}
-*/
+// var mongoose = require('mongoose');
+var http = require('http');
+var parseString = require('xml2js').parseString;
+var _ = require('underscore');
+var toggleStatus = false;
 
 exports.index = function(req, res) {
-  res.render('index.html', {text: "Hello World"});
+  res.render('index.html');
+}
+
+exports.shuttles = function(req, res) {
+  var req2 = http.get('http://webservices.nextbus.com/service/publicXMLFeed?command=routeList&a=mit', function(res2) {
+    res2.on('data', function (xml) {
+      parseString(xml, function (err, result) {
+        shuttles = _.map(result.body.route, function(route) {
+          return route.$;
+        });
+        res.send({shuttles: shuttles});
+      });
+    });
+    
+  })
+  req2.on('error', function(e) {
+    console.log('problem with request: ' + e.message);
+  });
+}
+
+exports.toggle = function(req, res) {
+  console.log('post')
+  toggleStatus = !toggleStatus;
+  winkapi.setOutlet(20582, toggleStatus, function(err, outlet) {
+    console.log('toggled!' + toggleStatus);
+    if (!!err) return console.log('setOutlet: ' + err.message);
+  });
+  res.end();
 }

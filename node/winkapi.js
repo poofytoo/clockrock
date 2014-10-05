@@ -251,6 +251,7 @@ WinkAPI.prototype.setDial = function(dial, props, callback) {
          , channel_configuration : props.channel_configuration || dial.props.channel_configuration 
          , dial_configuration    : props.dial_configuration    || dial.props.dial_configuration
          };
+  console.log(json);
   return self.roundtrip('PUT', dial.path, json, function(err, datum) {
     if (!!err) return callback(err);
 

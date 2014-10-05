@@ -1,0 +1,33 @@
+<!DOCTYPE HTML>
+<html ng-app="clockrock">
+  <head>
+    <title>Sample Node App</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.25/angular.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.25/angular-route.js"></script>
+    <link rel="stylesheet" type="text/css" href="/css/reset.css">
+    <link rel="stylesheet" type="text/css" href="/css/main.css">
+  </head>
+  <body ng-controller="ShuttleController">
+    <div ng-view></div>
+    <h1>Shuttles</h1>
+    <table>
+      <thead>
+        <tr>
+          <td>Shuttle Name</td>
+          <td></td>
+        </tr>
+      </thead>
+      <tbody>
+        <tr ng-repeat='shuttle in shuttles'>
+          <td>{{shuttle.title}}</td>
+          <td><button class='shuttle-select' data-id='{{shuttle.tag}}' data-name='{{shuttle.title}}'>select</button></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <button id='toggle' ng-click='toggleLight()'>TOGGLE ME</button>
+    <!-- Load any other client side scripts here. Add them in the /public/js/ folder -->
+    <script src='/js/jquery.min.js' type='text/javascript'></script>
+    <script src='/js/main.js' type='text/javascript'></script>
+  </body>
+</html>

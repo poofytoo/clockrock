@@ -9,17 +9,18 @@ var WinkAPI = require(__dirname + '/winkapi');
 var Firebase = require("firebase");
 
 var app = express();
-var toggleStatus = false;
-
-// VIEW ENGINE
-app.set('views', __dirname + '/views');
-app.set('view engine', 'html');
-app.engine('html', require('hbs').__express);
-app.set('view options', {layout: false});
-
-hbs.registerPartials(__dirname + '/views/partials');
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
+// VIEW ENGINE
+// app.set('views', __dirname + '/views');
+// app.set('view engine', 'html');
+// app.engine('html', require('hbs').__express);
+// app.set('view options', {layout: false});
+
+// hbs.registerPartials(__dirname + '/views/partials');
+app.use(express.static(path.join(__dirname, 'public')));
+
+// var jsonParser = bodyParser.json();
 // END VIEW ENGINE
 
 winkapi = new WinkAPI.WinkAPI({ clientID     : authConfig.auth.client_id
@@ -83,14 +84,11 @@ app.get('/', routes.index);
 // Uncomment the next line to test the database
 // app.get('/test-database', routes.testDatabase);
 
-app.post('/toggle', function(req, res) {
-  console.log('post')
-  toggleStatus = !toggleStatus;
-  winkapi.setOutlet(20582, toggleStatus, function(err, outlet) {
-    console.log('toggled!' + toggleStatus);
-    if (!!err) return console.log('setOutlet: ' + err.message);
-  });
-  res.end();
+app.post('/toggle', routes.toggle);
+app.post('/getShuttles', routes.shuttles);
+app.post('/setShuttle', function(req, res, next) {
+  console.log(req.body);
+  res.send({});
 });
 
 http.createServer(app).listen(3000, function(){

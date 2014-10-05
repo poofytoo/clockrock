@@ -10,8 +10,8 @@
     "hbs": "*",
     "body-parser": "*",
     "mongoose": "*",
-    "node-winkapi": "*",
-    "firebase": "*"
+    "firebase": "*",
+    "xml2js": "*"
   },
   "subdomain": "pikaramen.haptic-navigation",
   "scripts": {
